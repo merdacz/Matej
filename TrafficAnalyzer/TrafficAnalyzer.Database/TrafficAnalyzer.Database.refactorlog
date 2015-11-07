@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="57322ac5-5c7e-4052-882d-7997b1956a4a" ChangeDateTime="11/07/2015 00:47:07">
+    <Property Name="ElementName" Value="[dbo].[Logs].[date]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Logs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CrawlerName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="01332b2b-3fb8-475d-a86a-994e4be546de" ChangeDateTime="11/07/2015 00:47:10">
+    <Property Name="ElementName" Value="[dbo].[Logs].[time]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Logs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Hits" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="5be6f12e-7d7a-4b3d-a636-d2e824f3f348" ChangeDateTime="11/07/2015 00:47:18">
+    <Property Name="ElementName" Value="[dbo].[Logs].[c-ip]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Logs]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="TransferedBytes" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a81b635a-f842-4b09-99f1-c074a3d3adea" ChangeDateTime="11/07/2015 22:52:44">
+    <Property Name="ElementName" Value="[dbo].[CrawlerTraffic].[CrawlerName]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlerTraffic]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AccessAttempts" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="e4c9faf4-a35e-49e5-b2ea-0423eb364959" ChangeDateTime="11/07/2015 22:53:17">
+    <Property Name="ElementName" Value="[dbo].[CrawlerTraffic].[AccessAttempts]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlerTraffic]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CrawlerName" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="a045fe11-f8a6-49ac-ba54-346e4bb9a3e9" ChangeDateTime="11/07/2015 22:53:19">
+    <Property Name="ElementName" Value="[dbo].[CrawlerTraffic].[Hits]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[CrawlerTraffic]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="AccessAttempts" />
+  </Operation>
+</Operations>

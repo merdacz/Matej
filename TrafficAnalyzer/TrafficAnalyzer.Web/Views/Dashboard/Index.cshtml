@@ -1,0 +1,33 @@
+﻿@model IList<TrafficAnalyzer.Shared.CrawlerTraffic>
+
+@{
+    ViewBag.Title = "IIS logs crawler traffic dashboard";
+}
+<p>
+    <table id="traffic" class="display">
+        <thead>
+            <tr>
+                <th>Crawler Name</th>
+                <th>Access Attempts</th>
+                <th>Transfered Bytes</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var entry in Model)
+            {
+                <tr>
+                    <td>@entry.CrawlerName</td>
+                    <td>@entry.AccessAttempts</td>
+                    <td>@entry.TransferedBytes</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</p>
+<script>
+    $(document).ready(function () {
+        $('#traffic').DataTable({
+            "order": [[1, "desc"], [2, "desc"]]
+        });
+    });
+</script>
