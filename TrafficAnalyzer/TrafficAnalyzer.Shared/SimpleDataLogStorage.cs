@@ -25,12 +25,7 @@ namespace TrafficAnalyzer.Shared
         public IList<CrawlerTraffic> GetDashboardReport()
         {
             var db = Database.Open();
-            var entries = db.CrawlerTraffic.All()
-                .Select(
-                    db.CrawlerTraffic.CrawlerName,
-                    db.CrawlerTraffic.AccessAttempts.Sum().As("AccessAttempts"),
-                    db.CrawlerTraffic.TransferedBytes.Sum().As("TransferedBytes"));
-
+            var entries = db.CrawlerTraffic.All();
             IEnumerable<CrawlerTraffic> x = this.Map(entries);
             return x.ToList();
         } 

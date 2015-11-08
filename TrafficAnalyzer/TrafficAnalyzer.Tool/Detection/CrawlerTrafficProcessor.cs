@@ -1,6 +1,8 @@
 namespace TrafficAnalyzer.Tool.Detection
 {
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Security.Cryptography.X509Certificates;
 
     using TrafficAnalyzer.Shared;
     using TrafficAnalyzer.Tool.Parsing;
@@ -33,7 +35,21 @@ namespace TrafficAnalyzer.Tool.Detection
                 result.Add(traffic);
             }
 
-            return result;
+            return this.MergeDuplicatingEntries(result);
+        }
+
+        private IList<CrawlerTraffic> MergeDuplicatingEntries(IList<CrawlerTraffic> entries)
+        {
+            return entries.GroupBy(x => x.CrawlerName)
+                    .Select(
+                        group =>
+                        new CrawlerTraffic()
+                        {
+                            CrawlerName = group.First().CrawlerName,
+                            AccessAttempts = group.Sum(item => item.AccessAttempts),
+                            TransferedBytes = group.Sum(item => item.TransferedBytes)
+                        })
+                    .ToList();
         }
 
     }

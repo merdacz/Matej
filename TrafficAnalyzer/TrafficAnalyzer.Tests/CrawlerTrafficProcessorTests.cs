@@ -30,5 +30,18 @@
             trafficDtos.Should().HaveCount(2);
             trafficDtos.Should().NotContain(x => x.CrawlerName == Crawler.Unrecognized.Name);
         }
+
+        [Fact]
+        public void merges_crawler_entries_for_different_user_agent_representations()
+        {
+            var report = new TrafficReport();
+            report.AddEntry("1.1.1.1", "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)".CorrectSpacesInUserAgentBecauseTheyWontWorkInLogParser(), 12, 2048);
+            report.AddEntry("1.1.1.1", "Googlebot/2.1 (+http://www.google.com/bot.html)".CorrectSpacesInUserAgentBecauseTheyWontWorkInLogParser(), 132, 11048);
+
+            var sut = new CrawlerTrafficProcessor(new UserAgentBasedCrawlerDetector());
+
+            var trafficDtos = sut.Process(report);
+            trafficDtos.Should().HaveCount(1);
+        }
     }
 }
