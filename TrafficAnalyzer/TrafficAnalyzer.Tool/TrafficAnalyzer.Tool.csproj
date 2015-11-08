@@ -66,7 +66,7 @@
     <Compile Include="Support\IssueWithLogParserExtensions.cs" />
     <Compile Include="Parsing\LogQueryingException.cs" />
     <Compile Include="Parsing\TrafficReport.cs" />
-    <Compile Include="UserAgentBasedCrawlerDetector.cs" />
+    <Compile Include="Detection\UserAgentBasedCrawlerDetector.cs" />
     <Compile Include="Parsing\W3LogParserQueries.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
