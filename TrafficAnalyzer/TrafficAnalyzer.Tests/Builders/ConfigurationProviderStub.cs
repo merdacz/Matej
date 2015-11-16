@@ -1,5 +1,6 @@
 namespace TrafficAnalyzer.Tests.Builders
 {
+    using System;
     using TrafficAnalyzer.Tool;
     using TrafficAnalyzer.Tool.Support;
 
@@ -7,14 +8,22 @@ namespace TrafficAnalyzer.Tests.Builders
     {
         private readonly string logsPath;
 
-        public ConfigurationProviderStub(string logsPath)
+        private readonly TimeSpan logsTimespan;
+
+        public ConfigurationProviderStub(string logsPath, TimeSpan logsTimespan)
         {
             this.logsPath = logsPath;
+            this.logsTimespan = logsTimespan;
         }
 
         public string GetLogsPath()
         {
             return this.logsPath;
+        }
+
+        public TimeSpan GetLogsTimespan()
+        {
+            return this.logsTimespan;
         }
     }
 }

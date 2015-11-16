@@ -45,11 +45,21 @@
         public void Run()
         {
             var logsPath = this.configuration.GetLogsPath();
-            var now = DateTime.Now;
-            var trafficReport = this.queries.GetTrafficReport(
-                logsPath,
-                now.AddHours(-24),
-                now);
+            var logsTimespan = this.configuration.GetLogsTimespan();
+
+            TrafficReport trafficReport = null;
+            if (logsTimespan == TimeSpan.MaxValue)
+            {
+                trafficReport = this.queries.GetUnboundedTrafficReport(logsPath);
+            }
+            else
+            {
+                var now = DateTime.Now;
+                trafficReport = this.queries.GetTrafficReport(
+                    logsPath,
+                    now - logsTimespan,
+                    now);
+            }
 
             var trafficDtos = this.crawlerTrafficProcessor.Process(trafficReport);
             this.storage.RefreshTrafficReport(trafficDtos);

@@ -24,5 +24,19 @@ namespace TrafficAnalyzer.Tool.Parsing
                     ex);
             }
         }
+
+        public TrafficReport GetUnboundedTrafficReport(string filePath)
+        {
+            try
+            {
+                return this.target.GetUnboundedTrafficReport(filePath);
+            }
+            catch (Exception ex)
+            {
+                throw new LogQueryingException(
+                    $"Error during processing traffic query for {filePath} and unbounded period. ",
+                    ex);
+            }
+        }
     }
 }

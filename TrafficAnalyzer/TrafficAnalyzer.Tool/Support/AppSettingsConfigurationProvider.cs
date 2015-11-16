@@ -16,5 +16,24 @@
 
             return logsPath;
         }
+
+        public TimeSpan GetLogsTimespan()
+        {
+            var logsTimespan = ConfigurationManager.AppSettings["iis.logs.timespan"];
+            if (string.IsNullOrEmpty(logsTimespan))
+            {
+                return TimeSpan.MaxValue;
+            }
+
+            TimeSpan parsed;
+            TimeSpan.TryParse(logsTimespan, out parsed);
+            if (parsed == TimeSpan.Zero)
+            {
+                Console.WriteLine("Invalid configuration. Please check whether logs timespan has been set up correctly. ");
+                Environment.Exit(1);
+            }
+
+            return parsed;
+        }
     }
 }

@@ -8,6 +8,8 @@ namespace TrafficAnalyzer.Tests.Builders
     {
         public static DateTime ALittleBitBefore => DateTime.Now.AddHours(-2);
 
+        public static DateTime ALongTimeAgo => DateTime.Now.AddDays(-11);
+
         private readonly IList<W3LogEntry> entries = new List<W3LogEntry>();
 
         private W3LogBuilder()
@@ -43,6 +45,15 @@ namespace TrafficAnalyzer.Tests.Builders
             this.WithEntry(Ip("3.3.3.3"), Fresh, GoogleBot);
             return this;
         }
+
+        public W3LogBuilder WithMultipleCrawlerOldEntries()
+        {
+            this.WithEntry(Ip("1.1.1.1"), Old, GoogleBot);
+            this.WithEntry(Ip("2.2.2.2"), Old, GoogleBot);
+            this.WithEntry(Ip("3.3.3.3"), Old, GoogleBot);
+            return this;
+        }
+
         public W3LogBuilder WithMultipleRegularUsersFreshEntries()
         {
             this.WithEntry(Ip("1.1.1.1"), Fresh, Firefox);
@@ -75,11 +86,16 @@ namespace TrafficAnalyzer.Tests.Builders
         {
             entry.Timestamp = ALittleBitBefore;
         }
+        public static void Old(W3LogEntry entry)
+        {
+            entry.Timestamp = ALongTimeAgo;
+        }
 
         public static void GoogleBot(W3LogEntry entry)
         {
             entry.ClientToServer_Header_UserAgent = "Googlebot/2.1 (+http://www.google.com/bot.html)";
         }
+
         public static void Firefox(W3LogEntry entry)
         {
             entry.ClientToServer_Header_UserAgent = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1";

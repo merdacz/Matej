@@ -8,6 +8,7 @@ namespace TrafficAnalyzer.Tests.Builders
     using TrafficAnalyzer.Shared;
     using TrafficAnalyzer.Tool.Detection;
     using TrafficAnalyzer.Tool.Parsing;
+    using TrafficAnalyzer.Tool.Support;
 
     using static Tool.Support.Wiring;
 
@@ -16,6 +17,8 @@ namespace TrafficAnalyzer.Tests.Builders
         private TemporaryFile temporaryFile;
 
         private ILogStorage logStorage;
+        
+        private TimeSpan logsTimespan = TimeSpan.FromHours(24);
 
         public IEnumerable<CrawlerTraffic> InsertedEntries => this.logStorage?.GetAll();
 
@@ -34,12 +37,25 @@ namespace TrafficAnalyzer.Tests.Builders
             return this;
         }
 
+        public ProgramFixture WithDefaultTimespan()
+        {
+            this.logsTimespan = TimeSpan.FromHours(24);
+            return this;
+        }
+
+        public ProgramFixture WithUnboundedTimespan()
+        {
+            this.logsTimespan = TimeSpan.MaxValue; 
+            return this;
+        }
+
         public Program Build()
         {
             this.logStorage = Inject<ILogStorage>();
             this.logStorage.SwitchToInMemory();
+            var configuration = new ConfigurationProviderStub(this.temporaryFile.FileName, this.logsTimespan);
             return new Program(
-                new ConfigurationProviderStub(this.temporaryFile.FileName),
+                configuration,
                 Inject<ILogQueries>(),
                 this.logStorage,
                 Inject<ICrawlerTrafficProcessor>());
